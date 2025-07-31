@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.urls import reverse
 import logging
-from .models import Post
+from .models import Post,AboutUs
 from django.http import Http404
 from django.core.paginator import Paginator
 from .forms import ContactForm
@@ -66,3 +66,9 @@ def contact_view(request):
             logger.debug('Form Validation failure')
         return render(request,'contacat.html',{'form':form,'name':name,'message':message})
     return render(request,'contact.html')
+
+
+def about_view(request):
+    about_content=AboutUs.objects.first().content
+    return render(request,'about.html',{'about_content':about_content})
+
